@@ -316,3 +316,11 @@ print.slots <- function(x, ...) {
 print(one_play)
 
 play1 <- play()
+play1
+
+play2 <- play()
+play2
+
+c(play1, play2)
+
+play1[1]  
