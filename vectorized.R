@@ -67,3 +67,86 @@ length(long)
 system.time(abs_loop(long))
 system.time(abs_sets(long))
 system.time(abs(long))
+
+
+## page 175
+change_symbols <- function(vec){
+  for (i in 1:length(vec)){
+    if (vec[i] == "DD") {
+      vec[i] <- "joker"
+    } else if (vec[i] == "C") {
+      vec[i] <- "ace"
+    } else if (vec[i] == "7") {
+      vec[i] <- "king"
+    }else if (vec[i] == "B") {
+      vec[i] <- "queen"
+    } else if (vec[i] == "BB") {
+      vec[i] <- "jack"
+    } else if (vec[i] == "BBB") {
+      vec[i] <- "ten"
+    } else {
+      vec[i] <- "nine"
+    }
+  }
+  vec
+}
+vec <- c("DD", "C", "7", "B", "BB", "BBB", "0")
+change_symbols(vec)
+many <- rep(vec, 1000000)
+system.time(change_symbols(many))
+
+
+change_vec <- function (vec) {
+  vec[vec == "DD"] <- "joker"
+  vec[vec == "C"] <- "ace"
+  vec[vec == "7"] <- "king"
+  vec[vec == "B"] <- "queen"
+  vec[vec == "BB"] <- "jack"
+  vec[vec == "BBB"] <- "ten"
+  vec[vec == "0"] <- "nine"
+  vec
+}
+system.time(change_vec(many))
+
+change_vec2 <- function(vec){
+  tb <- c("DD" = "joker", "C" = "ace", "7" = "king", "B" = "queen",
+          "BB" = "jack", "BBB" = "ten", "0" = "nine")
+  unname(tb[vec])
+}
+system.time(change_vec2(many))
+
+# page 178
+
+system.time({
+  output <- rep(NA, 1000000)
+  for (i in 1:1000000) {
+    output[i] < i + 1
+  }
+})
+
+system.time({
+  output <- NA
+  for (i in 1:1000000) {
+    output[i] <- i + 1
+  }
+})
+
+
+system.time({
+  winnings <- vector(length = 1000000)
+  for (i in 1:1000000) {
+    winnings[i] <- play()
+  }
+  print(paste("Average win: ", mean(winnings)))
+})
+## 0.9366984  - very close to calculated expected value worked out in chapter 9
+
+######  Vectorize simulation  Page 180 ###############
+get_many_symbols <- function(n) {
+  wheel <- c("DD", "7", "BBB", "BB", "B", "C", "0")
+  vec <- sample(wheel, size = 3 * n, replace = TRUE,
+                prob = c(0.03, 0.03, 0.06, 0.1, 0.25, 0.01, 0.52))
+  matrix(vec, ncol = 3)
+}
+get_many_symbols(10)
+
