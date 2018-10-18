@@ -200,7 +200,7 @@ score_many <- function(symbols) {
   # Step 5: Double prize for every diamond in combo ------------------
   unname(prize * 2^diamonds)
 }
-  
+
 play_many <- function(n) {
   symb_mat <- get_many_symbols(n = n)
   data.frame(w1 = symb_mat[,1], w2 = symb_mat[,2],
@@ -215,10 +215,10 @@ system.time({
   print(mean(plays$prize))
 })
 # [1] 0.9371745
-# user  system elapsed 
-# 8.706   1.917  10.622 
+# user  system elapsed
+# 8.706   1.917  10.622
 
-## Non vectorised scoring - 'Only' One Million 
+## Non vectorised scoring - 'Only' One Million
 system.time({
   winnings <- vector(length = 1000000)
   for (i in 1:1000000) {
@@ -227,15 +227,15 @@ system.time({
   print(paste("Average win: ", mean(winnings)))
 })
 # [1] "Average win:  0.93637"
-# user  system elapsed 
-# 39.424   0.002  39.420 
+# user  system elapsed
+# 39.424   0.002  39.420
 
-#######################
-symbols <- matrix(
-  c("DD", "DD", "DD",
-    "C", "DD", "0",
-    "B", "B", "B",
-    "B", "BB", "BBB",
-    "C", "C", "0",
-    "7", "DD", "DD"), nrow = 6, byrow = TRUE)
-symbols
+# #######################
+# symbols <- matrix(
+#   c("DD", "DD", "DD",
+#     "C", "DD", "0",
+#     "B", "B", "B",
+#     "B", "BB", "BBB",
+#     "C", "C", "0",
+#     "7", "DD", "DD"), nrow = 6, byrow = TRUE)
+# symbols
