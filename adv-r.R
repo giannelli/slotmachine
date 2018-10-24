@@ -561,3 +561,62 @@ x
 
 # 3.3.3 Dimensions
 
+# Two scalar arguments specify row and column sizes
+a <- matrix(1:6, nrow = 2, ncol = 3)
+a
+
+# One vector argument to describe all dimensions
+b <- array(1:12, c(2, 3, 4))
+b
+
+# Recycling
+b <- array(1:2, c(2, 3, 4))
+b
+
+# You can also modify an object in place by setting dim()
+c <- 1:6
+dim(c) <- c(3, 2)
+c
+
+
+str(1:3)                   # 1d vector
+#>  int [1:3] 1 2 3
+str(matrix(1:3, ncol = 1)) # column vector
+#>  int [1:3, 1] 1 2 3
+str(matrix(1:3, nrow = 1)) # row vector
+#>  int [1, 1:3] 1 2 3
+str(array(1:3, 3))         # "array" vector
+#>  int [1:3(1d)] 1 2 3
+
+# ?setNames
+setNames
+
+?unname
+unname
+
+my_unname <- function (obj, force = FALSE) 
+{
+  if (!is.null(names(obj))) 
+    names(obj) <- NULL
+  if (!is.null(dimnames(obj)) && (force || !is.data.frame(obj))) 
+    dimnames(obj) <- NULL
+  obj
+}
+# ?NROW
+x < 1:10
+dim(x)
+NROW(x)
+
+x1 <- array(1:5, c(1, 1, 5))
+x1
+x2 <- array(1:5, c(1, 5, 1))
+x2
+x3 <- array(1:5, c(5, 1, 1))
+x3
+
+s <- structure(1:5, comment = "my attribute")
+s
+
+# ?structure
+attributes(s)
+
