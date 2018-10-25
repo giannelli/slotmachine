@@ -620,3 +620,136 @@ s
 # ?structure
 attributes(s)
 
+
+# 3.4 S3 atomic vectors
+
+x <- factor(c("a", "b", "b", "a"))
+x
+typeof(x)
+attributes(x)
+
+sex_char <- c("m", "m", "m")
+sex_factor <- factor(sex_char, levels = c("m", "f"))
+table(sex_char)
+table(sex_factor)
+# ?table
+
+grade <- ordered(c("b", "b", "a", "c"), levels = c("c", "b", "a"))
+grade
+typeof(grade)
+attributes(grade)
+
+# 3.4.2 Dates
+today <- Sys.Date()
+typeof(today)
+attributes(today)
+today
+
+date <- as.Date("1970-02-01")
+unclass(date)
+## Number of days since 1970-01-01
+
+
+now_ct <- as.POSIXct("2018-08-01 22:00", tz = "UTC")
+now_ct
+typeof(now_ct)
+attributes(now_ct)
+
+structure(now_ct, tzone = "Asia/Tokyo")
+structure(now_ct, tzone = "America/New_York")
+structure(now_ct, tzone = "Australia/Lord_Howe")
+structure(now_ct, tzone = "Europe/Paris")
+
+
+# 3.4.4 Exerciser
+
+t1 <- table(sex_factor)
+t1
+typeof(t1)
+attributes(t1)
+
+f1 <- factor(letters)
+f1
+levels(f1) <- rev(levels(f1))
+f1
+
+###############
+# 3.5 Lists
+###############
+
+l1 <- list(
+  1:3, 
+  "a", 
+  c(TRUE, FALSE, TRUE), 
+  c(2.3, 5.9)
+)
+
+typeof(l1)
+
+str(l1)
+l1
+
+
+lobstr::obj_size(mtcars)
+l2 <- list(mtcars, mtcars, mtcars, mtcars)
+lobstr::obj_size(l2)
+
+l3 <- list(list(list(1)))
+str(l3)
+l3
+
+l4 <- list(list(1, 2), c(3, 4))
+l5 <- c(list(1, 2), c(3, 4))
+str(l4)
+l4
+str(l5)
+l5
+
+typeof(l1)
+typeof(l2)
+typeof(l3)
+typeof(l4)
+typeof(l5)
+
+l6 <- list(1:3)
+typeof(l6)
+l6
+
+l7 <- as.list(1:3)
+typeof(l7)
+l7
+
+l8 <- as.list(l1, y = l2, z = l3)
+str(l8)
+l8
+attributes(l8)
+
+l9 <- l4
+l9
+str(l9)
+unlist(l9)
+l9
+str(l9)
+l10 <- unlist(l9)
+l10
+typeof(l10)
+l11 <- as.vector(l9)
+l11
+str(l11)
+typeof(l11)
+?as.vector
+is.vector(l9)
+# Already a vector!
+
+now_ct
+date
+print(c(date, now_ct))
+print(c(unlist(date), unlist(now_ct)))
+# ?unlist
+
+# 3.6 Data Frames and Tibbles
+
+df1 <- data.frame(x = 1:2, y = 2:1)
+typeof(df1)
+attributes(df1)
+
